@@ -165,7 +165,7 @@ const BlogPost1Page = () => {
                       className="gap-[0] min-h-[auto] 3xl:my-[11px] lg:my-[7px] xl:my-[8px] my-[9.5px] 2xl:my-[9px] w-[100%]"
                       orientation="vertical"
                     >
-                      {apiData?.response?.cover_image?.map((apiDataEle) => {
+                      {apiData?.response?.social_image?.map((apiDataEle) => {
                         return (
                           <Stack className="lg:h-[109px] xl:h-[124px] h-[139px] 2xl:h-[140px] 3xl:h-[167px] my-[0] rounded-bl-[0] rounded-br-[0] rounded-tl-[30px] rounded-tr-[30px] w-[100%]">
                             <Image
