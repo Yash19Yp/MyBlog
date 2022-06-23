@@ -18,9 +18,23 @@ export const getArticles = ({
   path = {},
 } = {}) => {
   return defaultAxios({
+    url: `https://dev.to/api/articles/${path?.id}`,
+    method: "get",
+    params,
+    headers,
+    data,
+  });
+};
+export const getArticles1 = ({
+  data = {},
+  headers = {},
+  params = {},
+  path = {},
+} = {}) => {
+  return defaultAxios({
     url: `https://dev.to/api/articles`,
     method: "get",
-    params: { per_page: "6", ...params },
+    params,
     headers,
     data,
   });

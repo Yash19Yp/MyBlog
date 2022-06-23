@@ -16,19 +16,19 @@ import { useNavigate } from "react-router-dom";
 const DashboardPage = () => {
   const navigate = useNavigate();
 
-  function handleNavigate21() {
+  function handleNavigate22() {
     navigate("/blogpost1");
   }
-  function handleNavigate22() {
+  function handleNavigate23() {
     navigate("/contactus");
   }
-  function handleNavigate23() {
+  function handleNavigate24() {
     navigate("/blog");
   }
-  function handleNavigate26() {
+  function handleNavigate27() {
     navigate("/aboutus");
   }
-  function handleNavigate27() {
+  function handleNavigate28() {
     navigate("/podcasts");
   }
 
@@ -44,19 +44,19 @@ const DashboardPage = () => {
                   <Text className="cursor-pointer hover:font-bold font-bold lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-center text-deep_purple_A200 tracking-ls1 w-[auto]">{`Home`}</Text>
                   <Text
                     className="common-pointer cursor-pointer hover:font-bold font-bold lg:ml-[22px] xl:ml-[25px] ml-[29px] 3xl:ml-[34px] lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-center hover:text-deep_purple_A200 tracking-ls1 w-[auto]"
-                    onClick={handleNavigate27}
+                    onClick={handleNavigate28}
                   >{`Podcast`}</Text>
                   <Text
                     className="common-pointer cursor-pointer hover:font-bold font-bold lg:ml-[22px] xl:ml-[25px] ml-[29px] 3xl:ml-[34px] lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-center hover:text-deep_purple_A200 tracking-ls1 w-[auto]"
-                    onClick={handleNavigate21}
+                    onClick={handleNavigate22}
                   >{`Blog`}</Text>
                   <Text
                     className="common-pointer cursor-pointer hover:font-bold font-bold lg:ml-[23px] xl:ml-[26px] ml-[30px] 3xl:ml-[36px] lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-center hover:text-deep_purple_A200 tracking-ls1 w-[auto]"
-                    onClick={handleNavigate26}
+                    onClick={handleNavigate27}
                   >{`About`}</Text>
                   <Text
                     className="common-pointer cursor-pointer hover:font-bold font-bold lg:ml-[22px] xl:ml-[25px] ml-[29px] 3xl:ml-[34px] lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-center hover:text-deep_purple_A200 tracking-ls1 w-[auto]"
-                    onClick={handleNavigate22}
+                    onClick={handleNavigate23}
                   >{`Contact`}</Text>
                 </Row>
               </Column>
@@ -242,7 +242,7 @@ const DashboardPage = () => {
               />
               <Button
                 className="common-pointer bg-deep_purple_A200 font-bold font-publicsans lg:pb-[20px] xl:pb-[23px] pb-[26.55px] 2xl:pb-[26px] 3xl:pb-[31px] lg:pl-[21px] xl:pl-[24px] pl-[28px] 3xl:pl-[33px] pr-[108px] 3xl:pr-[129px] lg:pr-[84px] xl:pr-[96px] lg:pt-[21px] xl:pt-[24px] pt-[27.55px] 2xl:pt-[27px] 3xl:pt-[33px] rounded-radius5 lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-deep_purple_A200 text-left tracking-ls1 w-[100%]"
-                onClick={handleNavigate23}
+                onClick={handleNavigate24}
               >{`Continue Reading`}</Button>
             </div>
             <Column className="lg:mt-[38px] xl:mt-[44px] mt-[50px] 3xl:mt-[60px] w-[100%]">

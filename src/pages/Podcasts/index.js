@@ -15,16 +15,16 @@ import {
 const PodcastsPage = () => {
   const navigate = useNavigate();
 
-  function handleNavigate6() {
+  function handleNavigate7() {
     navigate("/blogpost1");
   }
-  function handleNavigate7() {
+  function handleNavigate8() {
     navigate("/contactus");
   }
-  function handleNavigate15() {
+  function handleNavigate16() {
     navigate("/");
   }
-  function handleNavigate16() {
+  function handleNavigate17() {
     navigate("/aboutus");
   }
 
@@ -40,20 +40,20 @@ const PodcastsPage = () => {
                   <Row className="items-center justify-between w-[100%]">
                     <Text
                       className="common-pointer cursor-pointer hover:font-bold font-bold lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-center text-deep_purple_A200 tracking-ls1 w-[auto]"
-                      onClick={handleNavigate15}
+                      onClick={handleNavigate16}
                     >{`Home`}</Text>
                     <Text className="cursor-pointer hover:font-bold font-bold lg:ml-[22px] xl:ml-[25px] ml-[29px] 3xl:ml-[34px] lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-center hover:text-deep_purple_A200 tracking-ls1 w-[auto]">{`Podcast`}</Text>
                     <Text
                       className="common-pointer cursor-pointer hover:font-bold font-bold lg:ml-[22px] xl:ml-[25px] ml-[29px] 3xl:ml-[34px] lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-center hover:text-deep_purple_A200 tracking-ls1 w-[auto]"
-                      onClick={handleNavigate6}
+                      onClick={handleNavigate7}
                     >{`Blog`}</Text>
                     <Text
                       className="common-pointer cursor-pointer hover:font-bold font-bold lg:ml-[23px] xl:ml-[26px] ml-[30px] 3xl:ml-[36px] lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-center hover:text-deep_purple_A200 tracking-ls1 w-[auto]"
-                      onClick={handleNavigate16}
+                      onClick={handleNavigate17}
                     >{`About`}</Text>
                     <Text
                       className="common-pointer cursor-pointer hover:font-bold font-bold lg:ml-[22px] xl:ml-[25px] ml-[29px] 3xl:ml-[34px] lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-center hover:text-deep_purple_A200 tracking-ls1 w-[auto]"
-                      onClick={handleNavigate7}
+                      onClick={handleNavigate8}
                     >{`Contact`}</Text>
                   </Row>
                 </Column>

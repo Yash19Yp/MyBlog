@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
-import { getArticles } from "service/api";
+import { getArticles1 } from "service/api";
 import {
   Column,
   Row,
@@ -14,35 +14,38 @@ import {
 } from "components";
 
 const BlogPost1Page = () => {
-  const [apiData, setapiData] = React.useState();
+  const [apiData1, setapiData1] = React.useState();
   React.useEffect(() => {
-    callApi();
+    callApi1();
   }, []);
   const navigate = useNavigate();
 
-  function callApi() {
+  function callApi1() {
     const req = {};
-    getArticles(req)
+    getArticles1(req)
       .then((res) => {
-        setapiData(res);
+        setapiData1(res);
       })
       .catch((err) => {
         console.error(err);
       });
   }
-  function handleNavigate5() {
+  function handleNavigate1() {
+    navigate("/blog", { state: { id: apiData1 } });
+  }
+  function handleNavigate6() {
     navigate("/blog");
   }
-  function handleNavigate8() {
+  function handleNavigate9() {
     navigate("/");
   }
-  function handleNavigate9() {
+  function handleNavigate10() {
     navigate("/aboutus");
   }
-  function handleNavigate10() {
+  function handleNavigate11() {
     navigate("/podcasts");
   }
-  function handleNavigate11() {
+  function handleNavigate12() {
     navigate("/contactus");
   }
 
@@ -57,20 +60,20 @@ const BlogPost1Page = () => {
                 <Row className="items-center justify-between w-[100%]">
                   <Text
                     className="common-pointer cursor-pointer hover:font-bold font-bold lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-center text-deep_purple_A200 tracking-ls1 w-[auto]"
-                    onClick={handleNavigate8}
+                    onClick={handleNavigate9}
                   >{`Home`}</Text>
                   <Text
                     className="common-pointer cursor-pointer hover:font-bold font-bold lg:ml-[22px] xl:ml-[25px] ml-[29px] 3xl:ml-[34px] lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-center hover:text-deep_purple_A200 tracking-ls1 w-[auto]"
-                    onClick={handleNavigate10}
+                    onClick={handleNavigate11}
                   >{`Podcast`}</Text>
                   <Text className="cursor-pointer hover:font-bold font-bold lg:ml-[22px] xl:ml-[25px] ml-[29px] 3xl:ml-[34px] lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-center hover:text-deep_purple_A200 tracking-ls1 w-[auto]">{`Blog`}</Text>
                   <Text
                     className="common-pointer cursor-pointer hover:font-bold font-bold lg:ml-[23px] xl:ml-[26px] ml-[30px] 3xl:ml-[36px] lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-center hover:text-deep_purple_A200 tracking-ls1 w-[auto]"
-                    onClick={handleNavigate9}
+                    onClick={handleNavigate10}
                   >{`About`}</Text>
                   <Text
                     className="common-pointer cursor-pointer hover:font-bold font-bold lg:ml-[22px] xl:ml-[25px] ml-[29px] 3xl:ml-[34px] lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-center hover:text-deep_purple_A200 tracking-ls1 w-[auto]"
-                    onClick={handleNavigate11}
+                    onClick={handleNavigate12}
                   >{`Contact`}</Text>
                 </Row>
               </Column>
@@ -140,7 +143,7 @@ const BlogPost1Page = () => {
                 <Row className="items-center justify-start lg:pr-[262px] xl:pr-[300px] pr-[338px] 3xl:pr-[405px] w-[100%]">
                   <Text
                     className="common-pointer bg-deep_purple_A200 font-light leading-[normal] lg:pb-[11px] xl:pb-[13px] pb-[15px] 3xl:pb-[18px] lg:pl-[17px] xl:pl-[19px] pl-[22px] 3xl:pl-[26px] lg:pt-[10px] xl:pt-[12px] pt-[14px] 3xl:pt-[16px] rounded-radius5 lg:text-[10px] xl:text-[12px] text-[14px] 3xl:text-[16px] text-left text-white_A700 w-[26%]"
-                    onClick={handleNavigate5}
+                    onClick={handleNavigate6}
                   >{`Continue Reading`}</Text>
                   <Text className="font-light lg:mb-[14px] xl:mb-[16px] mb-[18px] 3xl:mb-[21px] lg:ml-[17px] xl:ml-[19px] ml-[22px] 3xl:ml-[26px] mt-[11px] 3xl:mt-[13px] lg:mt-[8px] xl:mt-[9px] opacity-op5 lg:text-[10px] xl:text-[12px] text-[14px] 3xl:text-[16px] text-indigo_900 text-left w-[auto]">{`Go to Spotify Now`}</Text>
                 </Row>
@@ -154,18 +157,22 @@ const BlogPost1Page = () => {
         </Column>
         <Column className="items-end lg:mt-[50px] xl:mt-[57px] mt-[65px] 3xl:mt-[78px] lg:pl-[115px] xl:pl-[131px] pl-[148px] 3xl:pl-[177px] lg:pr-[63px] xl:pr-[72px] pr-[82px] 3xl:pr-[98px] w-[100%]">
           <List className="gap-[0] min-h-[auto] w-[84%]" orientation="vertical">
-            {apiData?.map((apiDataEle) => {
-              return (
-                <Row className="items-start justify-between lg:my-[21px] xl:my-[24px] my-[28px] 3xl:my-[33px] w-[100%]">
+            <List
+              className="lg:gap-[21px] xl:gap-[24px] gap-[27px] 3xl:gap-[32px] grid grid-cols-3 min-h-[auto] lg:my-[21px] xl:my-[24px] my-[28px] 3xl:my-[33px] w-[100%]"
+              orientation="horizontal"
+            >
+              {apiData1?.map((apiData1Ele) => {
+                return (
                   <List
-                    className="gap-[0] lg:mb-[17px] xl:mb-[19px] mb-[22px] 3xl:mb-[26px] min-h-[auto] w-[32%]"
+                    className="common-pointer gap-[0] lg:mb-[17px] xl:mb-[19px] mb-[22px] 3xl:mb-[26px] min-h-[auto] w-[100%]"
+                    onClick={handleNavigate1}
                     orientation="vertical"
                   >
                     <List
                       className="gap-[0] min-h-[auto] 3xl:my-[11px] lg:my-[7px] xl:my-[8px] my-[9.5px] 2xl:my-[9px] w-[100%]"
                       orientation="vertical"
                     >
-                      {apiData?.response?.social_image?.map((apiDataEle) => {
+                      {apiData1?.response?.social_image?.map((apiData1Ele) => {
                         return (
                           <Stack className="lg:h-[109px] xl:h-[124px] h-[139px] 2xl:h-[140px] 3xl:h-[167px] my-[0] rounded-bl-[0] rounded-br-[0] rounded-tl-[30px] rounded-tr-[30px] w-[100%]">
                             <Image
@@ -178,10 +185,10 @@ const BlogPost1Page = () => {
                       })}
                     </List>
                     <Text className="font-cabin font-medium leading-[normal] lg:ml-[31px] xl:ml-[36px] ml-[41px] 3xl:ml-[49px] 3xl:my-[11px] lg:my-[7px] xl:my-[8px] my-[9.5px] 2xl:my-[9px] lg:text-[18px] xl:text-[21px] text-[24px] 3xl:text-[28px] text-bluegray_901 text-left w-[89%]">
-                      {apiDataEle?.title}
+                      {apiData1Ele?.title}
                     </Text>
                     <Text className="font-mulish font-semibold leading-[normal] lg:ml-[32px] xl:ml-[37px] ml-[42px] 3xl:ml-[50px] 3xl:my-[11px] lg:my-[7px] xl:my-[8px] my-[9.5px] 2xl:my-[9px] lg:text-[10px] xl:text-[12px] text-[14px] 3xl:text-[16px] text-bluegray_901 text-left w-[86%]">
-                      {apiDataEle?.description}
+                      {apiData1Ele?.description}
                     </Text>
                     <Column className="font-mulish 3xl:my-[11px] lg:my-[7px] xl:my-[8px] my-[9.5px] 2xl:my-[9px] w-[100%]">
                       <Row className="items-center justify-start lg:pl-[24px] xl:pl-[27px] pl-[31px] 3xl:pl-[37px] lg:pr-[49px] xl:pr-[56px] pr-[63px] 3xl:pr-[75px] w-[100%]">
@@ -189,8 +196,8 @@ const BlogPost1Page = () => {
                           className="gap-[0] min-h-[auto] rounded-radius30 w-[12%]"
                           orientation="vertical"
                         >
-                          {apiData?.response?.user?.profile_image?.map(
-                            (apiDataEle) => {
+                          {apiData1?.response?.user?.profile_image?.map(
+                            (apiData1Ele) => {
                               return (
                                 <Image
                                   src={"images/img_ellipse.png"}
@@ -202,90 +209,128 @@ const BlogPost1Page = () => {
                           )}
                         </List>
                         <Text className="font-semibold xl:mb-[12px] mb-[14px] 3xl:mb-[16px] lg:ml-[16px] xl:ml-[18px] ml-[21px] 3xl:ml-[25px] xl:mt-[11px] mt-[13px] 3xl:mt-[15px] lg:my-[10px] xl:text-[10px] text-[12px] 3xl:text-[14px] lg:text-[9px] text-bluegray_500 text-left w-[auto]">
-                          {apiDataEle?.user?.name}
+                          {apiData1Ele?.user?.name}
                         </Text>
                         <Text className="font-semibold lg:ml-[6px] xl:ml-[7px] ml-[8px] 3xl:ml-[9px] xl:my-[10px] my-[12px] 3xl:my-[14px] lg:my-[9px] lg:text-[10px] xl:text-[12px] text-[14px] 3xl:text-[16px] text-bluegray_200 text-left w-[auto]">
-                          {apiDataEle?.reading_time_minutes}
+                          {apiData1Ele?.reading_time_minutes}
                         </Text>
                         <Text className="font-semibold lg:ml-[12px] xl:ml-[14px] ml-[16px] 3xl:ml-[19px] lg:my-[10px] xl:my-[11px] my-[13px] 3xl:my-[15px] xl:text-[10px] text-[12px] 3xl:text-[14px] lg:text-[9px] text-bluegray_500 text-left w-[auto]">
-                          {apiDataEle?.readable_publish_date}
+                          {apiData1Ele?.readable_publish_date}
                         </Text>
                       </Row>
                     </Column>
                   </List>
-                  <Stack className="lg:h-[322px] xl:h-[368px] h-[413px] 2xl:h-[414px] 3xl:h-[496px] lg:ml-[21px] xl:ml-[24px] ml-[27px] 3xl:ml-[32px] w-[32%]">
-                    <Column className="absolute bg-white_A700 inset-y-[0] items-start justify-center left-[2%] lg:pb-[17px] xl:pb-[19px] pb-[22px] 3xl:pb-[26px] lg:pt-[122px] xl:pt-[140px] pt-[158px] 3xl:pt-[189px] right-[0] rounded-radius30 w-[98%]">
-                      <Text className="font-cabin font-medium leading-[normal] lg:ml-[28px] xl:ml-[32px] ml-[36px] 3xl:ml-[43px] lg:text-[18px] xl:text-[21px] text-[24px] 3xl:text-[28px] text-bluegray_901 text-left w-[90%]">{`10 secret tips for managing a team remotely`}</Text>
-                      <Text className="font-mulish font-semibold leading-[normal] lg:ml-[28px] xl:ml-[32px] ml-[37px] 3xl:ml-[44px] lg:mt-[14px] xl:mt-[16px] mt-[18px] 3xl:mt-[21px] lg:text-[10px] xl:text-[12px] text-[14px] 3xl:text-[16px] text-bluegray_901 text-left w-[88%]">
-                        {
-                          <>
-                            {`Our latest updates and blogs about managing your team`}
-                            <br />
-                            {`Our latest updates and blogs about managing your team`}
-                          </>
-                        }
-                      </Text>
-                      <Column className="font-mulish lg:mt-[28px] xl:mt-[32px] mt-[36px] 3xl:mt-[43px] w-[100%]">
-                        <Row className="items-center justify-evenly lg:px-[20px] xl:px-[23px] px-[26px] 3xl:px-[31px] w-[100%]">
-                          <Column className="rounded-radius30 w-[12%]">
-                            <Image
-                              src={"images/img_ellipse_1.png"}
-                              className="lg:h-[35px] xl:h-[40px] h-[44px] 2xl:h-[45px] 3xl:h-[53px] object-cover rounded-radius501 w-[100%]"
-                              alt="Ellipse"
-                            />
-                          </Column>
-                          <Stack className="lg:h-[16px] xl:h-[18px] h-[20px] 2xl:h-[21px] 3xl:h-[25px] lg:ml-[16px] xl:ml-[18px] ml-[21px] 3xl:ml-[25px] xl:my-[10px] my-[12px] 3xl:my-[14px] lg:my-[9px] w-[68%]">
-                            <Text className="absolute font-semibold left-[40%] lg:text-[10px] xl:text-[12px] text-[14px] 3xl:text-[16px] text-bluegray_200 text-left w-[auto]">{`I`}</Text>
-                            <Stack className="absolute lg:h-[14px] xl:h-[17px] h-[18px] 2xl:h-[19px] 3xl:h-[22px] top-[0] w-[100%]">
-                              <Text className="absolute bottom-[0] font-semibold left-[0] xl:text-[10px] text-[12px] 3xl:text-[14px] lg:text-[9px] text-bluegray_500 text-left w-[auto]">{`Bessie Cooper`}</Text>
-                              <Text className="absolute font-semibold right-[0] xl:text-[10px] text-[12px] 3xl:text-[14px] lg:text-[9px] text-bluegray_500 text-left w-[auto]">{`2nd January,2022`}</Text>
-                            </Stack>
-                          </Stack>
-                        </Row>
-                      </Column>
-                    </Column>
-                    <Stack className="absolute lg:h-[109px] xl:h-[124px] h-[139px] 2xl:h-[140px] 3xl:h-[167px] rounded-bl-[0] rounded-br-[0] rounded-tl-[30px] rounded-tr-[30px] top-[0] w-[100%]">
-                      <Image
-                        src={"images/img_rectangle_1.png"}
-                        className="absolute lg:h-[109px] xl:h-[124px] h-[139px] 2xl:h-[140px] 3xl:h-[167px] inset-[0] object-cover w-[100%]"
-                        alt="Rectangle"
-                      />
+                );
+              })}
+            </List>
+            <Row className="items-center justify-between lg:my-[21px] xl:my-[24px] my-[28px] 3xl:my-[33px] w-[100%]">
+              <Stack className="lg:h-[322px] xl:h-[369px] h-[414px] 2xl:h-[415px] 3xl:h-[498px] w-[33%]">
+                <Column className="absolute bg-white_A700 inset-y-[0] items-start justify-end left-[2%] lg:pb-[17px] xl:pb-[20px] pb-[23px] 3xl:pb-[27px] lg:pt-[122px] xl:pt-[140px] pt-[158px] 3xl:pt-[189px] right-[4%] rounded-radius30 w-[94%]">
+                  <Text className="font-cabin font-medium leading-[normal] lg:ml-[28px] xl:ml-[32px] ml-[36px] 3xl:ml-[43px] lg:text-[18px] xl:text-[21px] text-[24px] 3xl:text-[28px] text-bluegray_901 text-left w-[90%]">{`The 2020 Guide for White Men in Tech`}</Text>
+                  <Text className="font-mulish font-semibold leading-[normal] lg:ml-[30px] xl:ml-[34px] ml-[39px] 3xl:ml-[46px] lg:mt-[17px] xl:mt-[19px] mt-[22px] 3xl:mt-[26px] lg:text-[10px] xl:text-[12px] text-[14px] 3xl:text-[16px] text-bluegray_901 text-left w-[88%]">{`How to use centuries of unfair advantage to make the world a more equal place`}</Text>
+                  <Column className="font-mulish items-center lg:mt-[60px] xl:mt-[69px] mt-[78px] 3xl:mt-[93px] lg:pl-[20px] xl:pl-[23px] pl-[26px] 3xl:pl-[31px] lg:pr-[17px] xl:pr-[19px] pr-[22px] 3xl:pr-[26px] w-[100%]">
+                    <Stack className="lg:h-[33px] xl:h-[38px] h-[42px] 2xl:h-[43px] 3xl:h-[51px] mx-[auto] w-[87%]">
+                      <Row className="absolute items-center justify-between left-[0] w-[52%]">
+                        <Column className="rounded-radius30 w-[27%]">
+                          <Image
+                            src={"images/img_ellipse_3.png"}
+                            className="lg:h-[33px] xl:h-[38px] h-[42px] 2xl:h-[43px] 3xl:h-[51px] object-cover rounded-radius501 w-[100%]"
+                            alt="Ellipse"
+                          />
+                        </Column>
+                        <Text className="font-semibold xl:ml-[108px] ml-[122px] 3xl:ml-[146px] lg:ml-[94px] my-[11px] 3xl:my-[13px] lg:my-[8px] xl:my-[9px] lg:text-[10px] xl:text-[12px] text-[14px] 3xl:text-[16px] text-bluegray_200 text-left w-[auto]">{`I`}</Text>
+                      </Row>
+                      <Row className="absolute h-[max-content] inset-y-[0] items-center justify-evenly my-[auto] right-[0] w-[80%]">
+                        <Text className="font-semibold xl:text-[10px] text-[12px] 3xl:text-[14px] lg:text-[9px] text-bluegray_500 text-left w-[auto]">{`Darlene Robert`}</Text>
+                        <Text className="font-semibold xl:text-[10px] text-[12px] 3xl:text-[14px] lg:text-[9px] text-bluegray_500 text-left w-[auto]">{`2nd January,2022`}</Text>
+                      </Row>
                     </Stack>
-                  </Stack>
-                  <Stack className="lg:h-[322px] xl:h-[368px] h-[413px] 2xl:h-[414px] 3xl:h-[496px] lg:ml-[21px] xl:ml-[24px] ml-[27px] 3xl:ml-[32px] w-[32%]">
-                    <Column className="absolute bg-white_A700 inset-y-[0] items-start justify-end left-[2%] lg:pb-[17px] xl:pb-[19px] pb-[22px] 3xl:pb-[26px] lg:pt-[122px] xl:pt-[140px] pt-[158px] 3xl:pt-[189px] right-[0] rounded-radius30 w-[98%]">
-                      <Text className="font-cabin font-medium leading-[normal] lg:ml-[27px] xl:ml-[31px] ml-[35px] 3xl:ml-[42px] lg:text-[18px] xl:text-[21px] text-[24px] 3xl:text-[28px] text-bluegray_901 text-left w-[91%]">{`What Ever Happened to Steampunk?`}</Text>
-                      <Text className="font-mulish font-semibold leading-[normal] lg:ml-[26px] xl:ml-[30px] ml-[34px] 3xl:ml-[40px] lg:mt-[14px] xl:mt-[16px] mt-[18px] 3xl:mt-[21px] lg:text-[10px] xl:text-[12px] text-[14px] 3xl:text-[16px] text-bluegray_901 text-left w-[88%]">{`How the iPhone popularized steampunk… and how the iPhone killed it off`}</Text>
-                      <Column className="font-mulish items-center lg:mt-[59px] xl:mt-[67px] mt-[76px] 3xl:mt-[91px] lg:pl-[19px] xl:pl-[22px] pl-[25px] 3xl:pl-[30px] lg:pr-[16px] xl:pr-[18px] pr-[21px] 3xl:pr-[25px] w-[100%]">
-                        <Stack className="lg:h-[35px] xl:h-[40px] h-[44px] 2xl:h-[45px] 3xl:h-[53px] mx-[auto] w-[88%]">
-                          <Row className="absolute items-center justify-between left-[0] w-[54%]">
-                            <Column className="rounded-radius30 w-[25%]">
-                              <Image
-                                src={"images/img_ellipse_2.png"}
-                                className="lg:h-[35px] xl:h-[40px] h-[44px] 2xl:h-[45px] 3xl:h-[53px] object-cover rounded-radius501 w-[100%]"
-                                alt="Ellipse"
-                              />
-                            </Column>
-                            <Text className="font-semibold mb-[11px] 3xl:mb-[13px] lg:mb-[8px] xl:mb-[9px] xl:ml-[113px] ml-[128px] 3xl:ml-[153px] lg:ml-[99px] xl:mt-[10px] mt-[12px] 3xl:mt-[14px] lg:mt-[9px] lg:text-[10px] xl:text-[12px] text-[14px] 3xl:text-[16px] text-bluegray_200 text-left w-[auto]">{`I`}</Text>
-                          </Row>
-                          <Row className="absolute h-[max-content] inset-y-[0] items-center justify-evenly my-[auto] right-[0] w-[80%]">
-                            <Text className="font-semibold xl:text-[10px] text-[12px] 3xl:text-[14px] lg:text-[9px] text-bluegray_500 text-left w-[auto]">{`Courtney Henry`}</Text>
-                            <Text className="font-semibold xl:text-[10px] text-[12px] 3xl:text-[14px] lg:text-[9px] text-bluegray_500 text-left w-[auto]">{`2nd January,2022`}</Text>
-                          </Row>
-                        </Stack>
-                      </Column>
-                    </Column>
-                    <Stack className="absolute lg:h-[109px] xl:h-[124px] h-[139px] 2xl:h-[140px] 3xl:h-[167px] rounded-bl-[0] rounded-br-[0] rounded-tl-[30px] rounded-tr-[30px] top-[0] w-[100%]">
-                      <Image
-                        src={"images/img_rectangle_2.png"}
-                        className="absolute lg:h-[109px] xl:h-[124px] h-[139px] 2xl:h-[140px] 3xl:h-[167px] inset-[0] object-cover w-[100%]"
-                        alt="Rectangle"
-                      />
+                  </Column>
+                </Column>
+                <Stack className="absolute lg:h-[109px] xl:h-[124px] h-[139px] 2xl:h-[140px] 3xl:h-[167px] inset-x-[0] mx-[auto] rounded-bl-[0] rounded-br-[0] rounded-tl-[30px] rounded-tr-[30px] top-[0] w-[96%]">
+                  <Image
+                    src={"images/img_rectangle_3.png"}
+                    className="absolute lg:h-[109px] xl:h-[124px] h-[139px] 2xl:h-[140px] 3xl:h-[167px] inset-[0] object-cover w-[100%]"
+                    alt="Rectangle"
+                  />
+                </Stack>
+                <Image
+                  src={"images/defaultNoData.png"}
+                  className="absolute bottom-[17%] 3xl:h-[118px] lg:h-[77px] xl:h-[88px] h-[98px] 2xl:h-[99px] object-contain right-[0] rounded-bl-[0] rounded-br-[0] rounded-tl-[30px] rounded-tr-[30px] w-[94%]"
+                  alt="Image"
+                />
+              </Stack>
+              <Stack className="lg:h-[322px] xl:h-[369px] h-[414px] 2xl:h-[415px] 3xl:h-[498px] xl:ml-[10px] ml-[12px] 3xl:ml-[14px] lg:ml-[9px] w-[32%]">
+                <Column className="absolute bg-white_A700 inset-y-[0] items-start justify-end left-[2%] lg:pb-[17px] xl:pb-[20px] pb-[23px] 3xl:pb-[27px] lg:pt-[122px] xl:pt-[140px] pt-[158px] 3xl:pt-[189px] right-[0] rounded-radius30 w-[98%]">
+                  <Text className="font-cabin font-medium leading-[normal] lg:ml-[28px] xl:ml-[32px] ml-[36px] 3xl:ml-[43px] lg:text-[18px] xl:text-[21px] text-[24px] 3xl:text-[28px] text-bluegray_901 text-left w-[90%]">{`Why Are Women Still Behind in the Design World?`}</Text>
+                  <Text className="font-mulish font-semibold leading-[normal] lg:ml-[28px] xl:ml-[32px] ml-[37px] 3xl:ml-[44px] lg:mt-[17px] xl:mt-[19px] mt-[22px] 3xl:mt-[26px] lg:text-[10px] xl:text-[12px] text-[14px] 3xl:text-[16px] text-bluegray_901 text-left w-[88%]">{`It’s 2020, but women designers still face lower pay and less opportunity. What gives?`}</Text>
+                  <Column className="font-mulish items-center lg:mt-[60px] xl:mt-[69px] mt-[78px] 3xl:mt-[93px] lg:pl-[20px] xl:pl-[23px] pl-[26px] 3xl:pl-[31px] lg:pr-[21px] xl:pr-[24px] pr-[27px] 3xl:pr-[32px] w-[100%]">
+                    <Stack className="lg:h-[33px] xl:h-[38px] h-[42px] 2xl:h-[43px] 3xl:h-[51px] mx-[auto] w-[86%]">
+                      <Row className="absolute items-center justify-between left-[0] w-[53%]">
+                        <Column className="rounded-radius30 w-[27%]">
+                          <Image
+                            src={"images/img_ellipse_4.png"}
+                            className="lg:h-[33px] xl:h-[38px] h-[42px] 2xl:h-[43px] 3xl:h-[51px] object-cover rounded-radius501 w-[100%]"
+                            alt="Ellipse"
+                          />
+                        </Column>
+                        <Text className="font-semibold xl:ml-[109px] ml-[123px] 3xl:ml-[147px] lg:ml-[95px] my-[11px] 3xl:my-[13px] lg:my-[8px] xl:my-[9px] lg:text-[10px] xl:text-[12px] text-[14px] 3xl:text-[16px] text-bluegray_200 text-left w-[auto]">{`I`}</Text>
+                      </Row>
+                      <Row className="absolute h-[max-content] inset-y-[0] items-center justify-evenly my-[auto] right-[0] w-[79%]">
+                        <Text className="font-semibold xl:text-[10px] text-[12px] 3xl:text-[14px] lg:text-[9px] text-bluegray_500 text-left w-[auto]">{`Leslie Alexander`}</Text>
+                        <Text className="font-semibold xl:text-[10px] text-[12px] 3xl:text-[14px] lg:text-[9px] text-bluegray_500 text-left w-[auto]">{`2nd January,2022`}</Text>
+                      </Row>
                     </Stack>
-                  </Stack>
-                </Row>
-              );
-            })}
+                  </Column>
+                </Column>
+                <Stack className="absolute lg:h-[109px] xl:h-[124px] h-[139px] 2xl:h-[140px] 3xl:h-[167px] rounded-bl-[0] rounded-br-[0] rounded-tl-[30px] rounded-tr-[30px] top-[0] w-[100%]">
+                  <Image
+                    src={"images/img_rectangle_4.png"}
+                    className="absolute lg:h-[109px] xl:h-[124px] h-[139px] 2xl:h-[140px] 3xl:h-[167px] inset-[0] object-cover w-[100%]"
+                    alt="Rectangle"
+                  />
+                </Stack>
+              </Stack>
+              <Stack className="lg:h-[322px] xl:h-[369px] h-[414px] 2xl:h-[415px] 3xl:h-[498px] lg:ml-[21px] xl:ml-[24px] ml-[27px] 3xl:ml-[32px] w-[32%]">
+                <Column className="absolute bg-white_A700 inset-y-[0] items-start justify-center left-[2%] lg:pb-[17px] xl:pb-[20px] pb-[23px] 3xl:pb-[27px] lg:pt-[122px] xl:pt-[140px] pt-[158px] 3xl:pt-[189px] right-[0] rounded-radius30 w-[98%]">
+                  <Text className="font-cabin font-medium leading-[normal] lg:ml-[27px] xl:ml-[31px] ml-[35px] 3xl:ml-[42px] lg:text-[18px] xl:text-[21px] text-[24px] 3xl:text-[28px] text-bluegray_901 text-left w-[91%]">{`The Ultimate Guide to Becoming a Great Designer`}</Text>
+                  <Text className="font-mulish font-semibold leading-[normal] lg:ml-[28px] xl:ml-[32px] ml-[36px] 3xl:ml-[43px] lg:mt-[17px] xl:mt-[19px] mt-[22px] 3xl:mt-[26px] lg:text-[10px] xl:text-[12px] text-[14px] 3xl:text-[16px] text-bluegray_901 text-left w-[88%]">
+                    {
+                      <>
+                        {`Our latest updates and blogs about managing your team`}
+                        <br />
+                        {`Our latest updates and blogs about managing your team`}
+                      </>
+                    }
+                  </Text>
+                  <Column className="font-mulish items-center lg:mt-[29px] xl:mt-[33px] mt-[38px] 3xl:mt-[45px] lg:px-[19px] xl:px-[22px] px-[25px] 3xl:px-[30px] w-[100%]">
+                    <Stack className="lg:h-[33px] xl:h-[38px] h-[42px] 2xl:h-[43px] 3xl:h-[51px] mx-[auto] w-[87%]">
+                      <Row className="absolute items-center justify-between left-[0] w-[53%]">
+                        <Column className="rounded-radius30 w-[26%]">
+                          <Image
+                            src={"images/img_ellipse_6.png"}
+                            className="lg:h-[33px] xl:h-[38px] h-[42px] 2xl:h-[43px] 3xl:h-[51px] object-cover rounded-radius501 w-[100%]"
+                            alt="Ellipse"
+                          />
+                        </Column>
+                        <Text className="font-semibold xl:ml-[110px] ml-[124px] 3xl:ml-[148px] lg:ml-[96px] my-[11px] 3xl:my-[13px] lg:my-[8px] xl:my-[9px] lg:text-[10px] xl:text-[12px] text-[14px] 3xl:text-[16px] text-bluegray_200 text-left w-[auto]">{`I`}</Text>
+                      </Row>
+                      <Row className="absolute h-[max-content] inset-y-[0] items-center justify-evenly my-[auto] right-[0] w-[79%]">
+                        <Text className="font-semibold xl:text-[10px] text-[12px] 3xl:text-[14px] lg:text-[9px] text-bluegray_500 text-left w-[auto]">{`Eleanor Pena`}</Text>
+                        <Text className="font-semibold xl:text-[10px] text-[12px] 3xl:text-[14px] lg:text-[9px] text-bluegray_500 text-left w-[auto]">{`2nd January,2022`}</Text>
+                      </Row>
+                    </Stack>
+                  </Column>
+                </Column>
+                <Stack className="absolute lg:h-[109px] xl:h-[124px] h-[139px] 2xl:h-[140px] 3xl:h-[167px] rounded-bl-[0] rounded-br-[0] rounded-tl-[30px] rounded-tr-[30px] top-[0] w-[100%]">
+                  <Image
+                    src={"images/img_rectangle_5.png"}
+                    className="absolute lg:h-[109px] xl:h-[124px] h-[139px] 2xl:h-[140px] 3xl:h-[167px] inset-[0] object-cover w-[100%]"
+                    alt="Rectangle"
+                  />
+                </Stack>
+              </Stack>
+            </Row>
           </List>
         </Column>
         <Row className="font-publicsans items-start justify-start lg:mt-[52px] xl:mt-[60px] mt-[68px] 3xl:mt-[81px] lg:pl-[163px] xl:pl-[186px] pl-[210px] 3xl:pl-[252px] lg:pr-[301px] xl:pr-[344px] pr-[387px] 3xl:pr-[464px] w-[100%]">

@@ -1,6 +1,7 @@
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
+import { getArticles } from "service/api";
 import {
   Column,
   Row,
@@ -9,26 +10,40 @@ import {
   Image,
   Stack,
   Input,
-  Button,
   List,
+  Button,
 } from "components";
 
 const BlogPage = () => {
+  const [apiData, setapiData] = React.useState();
+  React.useEffect(() => {
+    callApi();
+  }, []);
   const navigate = useNavigate();
 
-  function handleNavigate17() {
-    navigate("/podcasts");
+  function callApi() {
+    const req = { path: { id: "id" } };
+    getArticles(req)
+      .then((res) => {
+        setapiData(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
   function handleNavigate18() {
-    navigate("/blogpost1");
+    navigate("/podcasts");
   }
   function handleNavigate19() {
+    navigate("/blogpost1");
+  }
+  function handleNavigate20() {
     navigate("/contactus");
   }
-  function handleNavigate24() {
+  function handleNavigate25() {
     navigate("/");
   }
-  function handleNavigate25() {
+  function handleNavigate26() {
     navigate("/aboutus");
   }
 
@@ -43,23 +58,23 @@ const BlogPage = () => {
                 <Row className="items-center justify-between w-[100%]">
                   <Text
                     className="common-pointer cursor-pointer hover:font-bold font-bold lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-center text-deep_purple_A200 tracking-ls1 w-[auto]"
-                    onClick={handleNavigate24}
+                    onClick={handleNavigate25}
                   >{`Home`}</Text>
                   <Text
                     className="common-pointer cursor-pointer hover:font-bold font-bold lg:ml-[22px] xl:ml-[25px] ml-[29px] 3xl:ml-[34px] lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-center hover:text-deep_purple_A200 tracking-ls1 w-[auto]"
-                    onClick={handleNavigate17}
+                    onClick={handleNavigate18}
                   >{`Podcast`}</Text>
                   <Text
                     className="common-pointer cursor-pointer hover:font-bold font-bold lg:ml-[22px] xl:ml-[25px] ml-[29px] 3xl:ml-[34px] lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-center hover:text-deep_purple_A200 tracking-ls1 w-[auto]"
-                    onClick={handleNavigate18}
+                    onClick={handleNavigate19}
                   >{`Blog`}</Text>
                   <Text
                     className="common-pointer cursor-pointer hover:font-bold font-bold lg:ml-[23px] xl:ml-[26px] ml-[30px] 3xl:ml-[36px] lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-center hover:text-deep_purple_A200 tracking-ls1 w-[auto]"
-                    onClick={handleNavigate25}
+                    onClick={handleNavigate26}
                   >{`About`}</Text>
                   <Text
                     className="common-pointer cursor-pointer hover:font-bold font-bold lg:ml-[22px] xl:ml-[25px] ml-[29px] 3xl:ml-[34px] lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-center hover:text-deep_purple_A200 tracking-ls1 w-[auto]"
-                    onClick={handleNavigate19}
+                    onClick={handleNavigate20}
                   >{`Contact`}</Text>
                 </Row>
               </Column>
@@ -75,7 +90,7 @@ const BlogPage = () => {
         <Stack className="font-publicsans lg:h-[614px] xl:h-[702px] h-[789px] 2xl:h-[790px] 3xl:h-[948px] lg:ml-[42px] xl:ml-[48px] ml-[55px] 3xl:ml-[66px] lg:mt-[38px] xl:mt-[44px] mt-[50px] 3xl:mt-[60px] w-[92%]">
           <Stack className="absolute lg:h-[614px] xl:h-[702px] h-[789px] 2xl:h-[790px] 3xl:h-[948px] inset-[0] w-[100%]">
             <Image
-              src={"images/img_rectangle20.png"}
+              src={apiData?.social_image}
               className="absolute lg:h-[389px] xl:h-[445px] h-[500px] 2xl:h-[501px] 3xl:h-[601px] object-cover rounded-radius25 top-[0] w-[100%]"
               alt="Rectangle20"
             />
@@ -90,10 +105,12 @@ const BlogPage = () => {
                 <div className="absolute bg-pink_300 lg:h-[11px] xl:h-[13px] h-[14px] 2xl:h-[15px] 3xl:h-[17px] right-[6%] rounded-radius501 top-[6%] lg:w-[10px] xl:w-[12px] w-[14px] 3xl:w-[16px]"></div>
               </Stack>
               <Column className="items-start mb-[10px] 3xl:mb-[12px] lg:mb-[7px] xl:mb-[8px] lg:ml-[10px] xl:ml-[12px] ml-[14px] 3xl:ml-[16px] mt-[11px] 3xl:mt-[13px] lg:mt-[8px] xl:mt-[9px] w-[22%]">
-                <Column className="w-[100%]">
-                  <Text className="font-semibold mx-[auto] lg:text-[18px] xl:text-[21px] text-[24px] 3xl:text-[28px] text-bluegray_600 text-center w-[auto]">{`By Jhone Leonardo`}</Text>
-                </Column>
-                <Text className="font-light lg:mt-[3px] xl:mt-[4px] mt-[5px] 3xl:mt-[6px] lg:text-[10px] xl:text-[12px] text-[14px] 3xl:text-[16px] text-bluegray_600 text-center w-[auto]">{`12 September, 2020`}</Text>
+                <Text className="font-semibold mx-[auto] lg:text-[18px] xl:text-[21px] text-[24px] 3xl:text-[28px] text-bluegray_600 text-center w-[auto]">
+                  {apiData?.user?.name}
+                </Text>
+                <Text className="font-light lg:mt-[3px] xl:mt-[4px] mt-[5px] 3xl:mt-[6px] lg:text-[10px] xl:text-[12px] text-[14px] 3xl:text-[16px] text-bluegray_600 text-center w-[auto]">
+                  {apiData?.readable_publish_date}
+                </Text>
               </Column>
               <div className="3xl:ml-[594px] bg-transparent border-0 lg:ml-[385px] lg:my-[3px] ml-[495px] my-[4px] w-[19%] xl:ml-[440px] xl:my-[3px] input-wrap">
                 <Image
@@ -121,11 +138,15 @@ const BlogPage = () => {
                 <>{`Writing`}</>
               </span>
             </Text>
-            <Text className="font-bold font-merriweather italic leading-[normal] lg:mt-[21px] xl:mt-[24px] mt-[28px] 3xl:mt-[33px] lg:text-[37px] xl:text-[42px] text-[48px] 3xl:text-[57px] text-indigo_900 text-left tracking-ls1 w-[100%]">{`How to write a book properly and correctly by paying attention to various parts to support the story`}</Text>
+            <Text className="font-bold font-merriweather italic leading-[normal] lg:mt-[21px] xl:mt-[24px] mt-[28px] 3xl:mt-[33px] lg:text-[37px] xl:text-[42px] text-[48px] 3xl:text-[57px] text-indigo_900 text-left tracking-ls1 w-[100%]">
+              {apiData?.title}
+            </Text>
           </Column>
         </Stack>
         <Column className="font-publicsans items-start lg:mt-[62px] xl:mt-[71px] mt-[80px] 3xl:mt-[96px] lg:pl-[178px] xl:pl-[204px] pl-[230px] 3xl:pl-[276px] lg:pr-[179px] xl:pr-[205px] pr-[231px] 3xl:pr-[277px] w-[100%]">
-          <Text className="font-light lg:leading-[27px] xl:leading-[31px] leading-[35.00px] 2xl:leading-[35px] 3xl:leading-[42px] lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-left w-[68%]">{`Did you come here for something in particular or just general Riker-bashing? And blowing into maximum warp speed, you appeared for an instant to be in two places at once. We have a saboteur aboard. We know you’re dealing in stolen ore. But I wanna talk about the assassination attempt on Lieutenant Worf. Could someone survive inside a transporter buffer for 75 years? Fate. It protects fools, little children, and ships named “Enterprise.”`}</Text>
+          <Text className="font-light lg:leading-[27px] xl:leading-[31px] leading-[35.00px] 2xl:leading-[35px] 3xl:leading-[42px] lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-left w-[68%]">
+            {apiData?.description}
+          </Text>
         </Column>
         <Row className="items-start justify-center lg:ml-[178px] xl:ml-[204px] ml-[230px] 3xl:ml-[276px] lg:mt-[38px] xl:mt-[44px] mt-[50px] 3xl:mt-[60px] w-[66%]">
           <Image
@@ -140,15 +161,7 @@ const BlogPage = () => {
         </Row>
         <Column className="items-start lg:mt-[38px] xl:mt-[44px] mt-[50px] 3xl:mt-[60px] lg:pl-[178px] xl:pl-[204px] pl-[230px] 3xl:pl-[276px] lg:pr-[179px] xl:pr-[205px] pr-[231px] 3xl:pr-[277px] w-[100%]">
           <Text className="font-light font-publicsans lg:leading-[27px] xl:leading-[31px] leading-[35.00px] 2xl:leading-[35px] 3xl:leading-[42px] lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-left w-[68%]">
-            <span className="text-bluegray_600">
-              <>{`The game’s not big enough unless it scares you a little. Wait a minute – you’ve been declared dead. You can’t give `}</>
-            </span>
-            <span className="text-bluegray_600 font-bold">
-              <>{`orders around`}</>
-            </span>
-            <span className="text-bluegray_600">
-              <>{` here. I’ll alert the crew. What? We’re not at all alike! Flair is what marks the difference between artistry and mere competence.`}</>
-            </span>
+            {apiData?.body_markdown}
           </Text>
           <Text className="font-light font-publicsans lg:leading-[27px] xl:leading-[31px] leading-[35.00px] 2xl:leading-[35px] 3xl:leading-[42px] mt-[10px] 3xl:mt-[12px] lg:mt-[7px] xl:mt-[8px] lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-left w-[68%]">{`Did you come here for something in particular or just general Riker-bashing? And blowing into maximum warp speed, you appeared for an instant to be in two places at once. We have a saboteur aboard.`}</Text>
           <Text className="font-light font-publicsans lg:leading-[27px] xl:leading-[31px] leading-[35.00px] 2xl:leading-[35px] 3xl:leading-[42px] mt-[10px] 3xl:mt-[12px] lg:mt-[7px] xl:mt-[8px] lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-left w-[68%]">{`Could someone survive inside a transporter buffer for 75 years? Fate. It protects fools, little children, and ships named “Enterprise.”`}</Text>
@@ -184,13 +197,16 @@ const BlogPage = () => {
           </Row>
           <Text className="font-light lg:leading-[27px] xl:leading-[31px] leading-[35.00px] 2xl:leading-[35px] 3xl:leading-[42px] lg:mt-[15px] xl:mt-[17px] mt-[20px] 3xl:mt-[24px] lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-left w-[68%]">{`Could someone survive inside a transporter buffer for 75 years? Fate. It protects fools, little children, and ships named “Enterprise.”`}</Text>
           <Text className="font-medium lg:mt-[38px] xl:mt-[44px] mt-[50px] 3xl:mt-[60px] lg:text-[18px] xl:text-[21px] text-[24px] 3xl:text-[28px] text-bluegray_600 text-left w-[auto]">{`Tags`}</Text>
-          <Row className="items-center justify-start lg:mt-[11px] xl:mt-[13px] mt-[15px] 3xl:mt-[18px] w-[35%]">
-            <Button className="bg-indigo_100_38 font-thin py-[10.54px] 2xl:py-[10px] 3xl:py-[12px] lg:py-[8px] xl:py-[9px] rounded-radius5 lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-center w-[19%]">{`Writing`}</Button>
-            <Button className="bg-indigo_100_38 font-thin lg:ml-[11px] xl:ml-[13px] ml-[15px] 3xl:ml-[18px] py-[10.54px] 2xl:py-[10px] 3xl:py-[12px] lg:py-[8px] xl:py-[9px] rounded-radius5 lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-center w-[19%]">{`Tutorial`}</Button>
-            <Button className="bg-indigo_100_38 font-thin lg:ml-[11px] xl:ml-[13px] ml-[15px] 3xl:ml-[18px] py-[10.54px] 2xl:py-[10px] 3xl:py-[12px] lg:py-[8px] xl:py-[9px] rounded-radius5 lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-center w-[19%]">{`How to`}</Button>
-            <Button className="bg-indigo_100_38 font-thin lg:ml-[11px] xl:ml-[13px] ml-[15px] 3xl:ml-[18px] py-[10.54px] 2xl:py-[10px] 3xl:py-[12px] lg:py-[8px] xl:py-[9px] rounded-radius5 lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-center w-[15%]">{`Book`}</Button>
-            <Button className="bg-indigo_100_38 font-thin lg:ml-[11px] xl:ml-[13px] ml-[15px] 3xl:ml-[18px] py-[10.54px] 2xl:py-[10px] 3xl:py-[12px] lg:py-[8px] xl:py-[9px] rounded-radius5 lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-center w-[15%]">{`2020`}</Button>
-          </Row>
+          <List
+            className="lg:gap-[11px] xl:gap-[13px] gap-[15px] 3xl:gap-[18px] grid grid-cols-5 min-h-[auto] lg:mt-[11px] xl:mt-[13px] mt-[15px] 3xl:mt-[18px] w-[35%]"
+            orientation="horizontal"
+          >
+            {apiData?.tag_list?.map((apiDataEle) => {
+              return (
+                <Button className="bg-indigo_100_38 font-thin py-[10.54px] 2xl:py-[10px] 3xl:py-[12px] lg:py-[8px] xl:py-[9px] rounded-radius5 lg:text-[14px] xl:text-[16px] text-[18px] 3xl:text-[21px] text-bluegray_600 text-center w-[100%]">{`Writing`}</Button>
+              );
+            })}
+          </List>
         </Column>
         <Column className="font-publicsans items-center justify-start lg:mt-[44px] xl:mt-[50px] mt-[57px] 3xl:mt-[68px] lg:pl-[297px] xl:pl-[340px] pl-[383px] 3xl:pl-[459px] lg:pr-[338px] xl:pr-[386px] pr-[435px] 3xl:pr-[522px] w-[100%]">
           <Stack className="lg:h-[127px] xl:h-[146px] h-[163px] 2xl:h-[164px] 3xl:h-[196px] mx-[auto] w-[43%]">
